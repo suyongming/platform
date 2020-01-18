@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sym</groupId>
+    <artifactId>platform</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.3.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <modules>
+        <module>platform-eureka</module>
+        <!--<module>paascloud-discovery</module>-->
+        <!--<module>paascloud-monitor</module>-->
+        <!--<module>paascloud-zipkin</module>-->
+        <!--<module>paascloud-gateway</module>-->
+        <!--<module>paascloud-provider-entity</module>-->
+        <module>platform-api</module>
+        <!--<module>paascloud-provider</module>-->
+        <!--<module>paascloud-generator</module>-->
+    </modules>
+
+    <developers>
+        <developer>
+            <name>suyongming</name>
+            <url>https://github.com/suyongming/platform</url>
+            <email>476231418@qq.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <!-- 文件拷贝时的编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 编译时的编码 -->
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <java.version>1.8</java.version>
+        <!-- google java jar -->
+        <guava.version>17.0</guava.version>
+        <!-- Spring Settings -->
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+
+        <lombok.version>1.16.14</lombok.version>
+
+        
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!-- google java lib -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <!--依赖管理，用于管理spring-cloud的依赖-->
+    <!--相对于dependencyManagement，所有生命在dependencies里的依赖都会自动引入，并默认被所有的子项目继承。-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+            <activation>
+                <!--采用开发环境配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!--<profile>-->
+            <!--<id>pro</id>-->
+            <!--<properties>-->
+                <!--<profileActive>pro</profileActive>-->
+            <!--</properties>-->
+        <!--</profile>-->
+    </profiles>
+
+</project>
