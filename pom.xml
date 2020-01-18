@@ -16,6 +16,7 @@
     </parent>
 
     <modules>
+        <!--<module>platform-admin</module>-->
         <module>platform-eureka</module>
         <!--<module>paascloud-discovery</module>-->
         <!--<module>paascloud-monitor</module>-->
@@ -85,11 +86,6 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <scope>test</scope>
             </dependency>
 
 
