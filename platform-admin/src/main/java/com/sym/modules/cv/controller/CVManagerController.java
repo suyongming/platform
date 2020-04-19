@@ -12,7 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author suyongming
@@ -31,7 +36,7 @@ public class CVManagerController extends AbstractController {
     private FaceCVUtils faceCVUtils;
 
     @GetMapping(value = "/face/test")
-    public String tes(String img,String img1) throws Exception {
+    public String tes(String img, String img1) throws Exception {
         String netImg = Img2Base64.encodeImageToBase64(new URL(img));
         String netImg1 = Img2Base64.encodeImageToBase64(new URL(img1));
 
@@ -41,7 +46,7 @@ public class CVManagerController extends AbstractController {
         System.out.println(JSONObject.toJSONString(fDetectResult));
 
         // 人脸对比调用
-        FaceVerifyResult fVerifyResult = faceCVUtils.faceVerify(netImg,netImg1);
+        FaceVerifyResult fVerifyResult = faceCVUtils.faceVerify(netImg, netImg1);
         System.out.println(JSONObject.toJSONString(fVerifyResult));
         return JSONObject.toJSONString(getUser());
     }
@@ -51,17 +56,31 @@ public class CVManagerController extends AbstractController {
     public R verify(@RequestParam("file") MultipartFile multipartFile, FaceVerifyVO faceVerifyVO) throws Exception {
 
 
-
         SysUserEntity userEntity = getUser();
         faceVerifyVO.setUsername(userEntity.getUsername());
-
 
 
         // 人脸对比调用
 //        String img = "";
 //        String img1 = "";
-        return cvFaceVerifyService.verifyFaceSave(multipartFile,faceVerifyVO,userEntity);
+        return cvFaceVerifyService.verifyFaceSave(multipartFile, faceVerifyVO, userEntity);
     }
 
+    @PostMapping(value = "/ocr/test")
+    public R ocr(@RequestParam("file") MultipartFile file, FaceVerifyVO faceVerifyVO) throws Exception {
+        //获取上传文件名,包含后缀
+        String originalFilename = file.getOriginalFilename();
+        //获取后缀
+        String substring = originalFilename.substring(originalFilename.lastIndexOf("."));
+        //保存的文件名
+        SysUserEntity userEntity = getUser();
+        String time = new SimpleDateFormat("HHmmss").format(new Date());
+        String dFileName = userEntity.getUsername() + time + substring;
+        //保存路径
+        String finalName = FileUtils.executeUpload(dFileName, file);
+        //OCR识别
+        return cvFaceVerifyService.localOCR(finalName);
+
+    }
 
 }

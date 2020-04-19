@@ -1,5 +1,19 @@
 package com.sym.modules.cv.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.green.model.v20180509.ImageSyncScanRequest;
+import com.aliyuncs.http.FormatType;
+import com.aliyuncs.http.HttpResponse;
+import com.aliyuncs.http.MethodType;
+import com.aliyuncs.http.ProtocolType;
+import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.profile.IClientProfile;
 import com.sym.common.exception.CustomException;
 import com.sym.common.utils.*;
 import com.sym.modules.cv.vo.FaceVerifyVO;
@@ -12,10 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -33,19 +44,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public class CvFaceVerifyServiceImpl extends ServiceImpl<CvFaceVerifyDao, CvFaceVerifyEntity> implements CvFaceVerifyService {
 
-    public static void main(String[] args) {
-        List<String> list = new ArrayList();
-        list.add("1");
-        list.add("2");
 
-        list.removeIf(item->"2".equals(item));
-
-        list.forEach(item->{
-            System.out.println(item);
-        });
-
-        Map a = new HashMap(16);
-    }
     @Autowired
     private FaceCVUtils faceCVUtils;
 
@@ -113,6 +112,25 @@ public class CvFaceVerifyServiceImpl extends ServiceImpl<CvFaceVerifyDao, CvFace
 
 
         return null;
+    }
+
+    @Override
+    public R httpsOCR(String url) throws ClientException {
+        JSONObject result = faceCVUtils.httpsOCR(url);
+        if(result.get("code").equals("200")){
+            R.ok().put("data",result);
+        }
+        return R.error("识别失败");
+    }
+
+    @Override
+    public R localOCR(String url) throws ClientException {
+        JSONObject result = faceCVUtils.localOCR(url);
+        if(result == null){
+            return R.error("识别失败");
+        }
+
+        return R.ok().put("data",result );
     }
 
 }

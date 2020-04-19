@@ -1,5 +1,6 @@
 package com.sym.modules.cv.service;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sym.common.utils.FaceVerifyResult;
 import com.sym.common.utils.PageUtils;
@@ -23,5 +24,13 @@ public interface CvFaceVerifyService extends IService<CvFaceVerifyEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     R verifyFaceSave(MultipartFile multipartFile, FaceVerifyVO faceVerifyVO, SysUserEntity userEntity);
+
+    /**
+     * OCR识别
+     * */
+    R httpsOCR(String url) throws ClientException;
+
+    R localOCR(String url) throws ClientException;
+
 }
 
