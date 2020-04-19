@@ -5,11 +5,7 @@ import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sym.modules.order.entity.OrderMasterEntity;
 import com.sym.modules.order.service.OrderMasterService;
@@ -33,8 +29,11 @@ public class OrderMasterController {
 
     /**
      * 列表
+     * @param page
+     * @param limit
+     * @Param shippingUser 收货人姓名
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
 //    @RequiresPermissions("order:ordermaster:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = orderMasterService.queryPage(params);

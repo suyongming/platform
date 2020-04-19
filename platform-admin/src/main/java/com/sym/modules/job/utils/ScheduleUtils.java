@@ -111,6 +111,7 @@ public class ScheduleUtils {
         	
             scheduler.triggerJob(getJobKey(scheduleJob.getJobId()), dataMap);
         } catch (SchedulerException e) {
+            System.out.println(e);
             throw new CustomException("立即执行定时任务失败", e);
         }
     }

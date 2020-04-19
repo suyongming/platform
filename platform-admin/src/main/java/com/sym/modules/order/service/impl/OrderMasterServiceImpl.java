@@ -1,10 +1,12 @@
 package com.sym.modules.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -21,11 +23,12 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterDao, OrderMas
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-//        List<OrderMasterEntity> list = baseMapper.selectList( new QueryWrapper());
+        String shippingUser = (String) params.get("shippingUser");
 
         IPage<OrderMasterEntity> page = this.page(
                 new Query<OrderMasterEntity>().getPage(params),
                 new QueryWrapper<OrderMasterEntity>()
+                        .like(StringUtils.isNotBlank(shippingUser), "shipping_user", shippingUser)
         );
 
         return new PageUtils(page);

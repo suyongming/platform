@@ -236,6 +236,12 @@
 			<version>${gson.version}</version>
 		</dependency>
 
+		<!--引用自定义的jar包-->
+		<dependency>
+			<groupId>com.sym</groupId>
+			<artifactId>platform-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- Eureka 服务发现与注册客户端依赖 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
