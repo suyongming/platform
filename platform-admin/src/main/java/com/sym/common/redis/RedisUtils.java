@@ -1,6 +1,6 @@
 
 
-package com.sym.common.utils;
+package com.sym.common.redis;
 
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;

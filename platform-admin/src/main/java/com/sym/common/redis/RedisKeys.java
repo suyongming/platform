@@ -1,6 +1,6 @@
 
 
-package com.sym.common.utils;
+package com.sym.common.redis;
 
 /**
  * Redis所有Keys

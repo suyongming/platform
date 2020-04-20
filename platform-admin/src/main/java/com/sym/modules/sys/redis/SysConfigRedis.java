@@ -3,8 +3,8 @@
 package com.sym.modules.sys.redis;
 
 
-import com.sym.common.utils.RedisKeys;
-import com.sym.common.utils.RedisUtils;
+import com.sym.common.redis.RedisKeys;
+import com.sym.common.redis.RedisUtils;
 import com.sym.modules.sys.entity.SysConfigEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

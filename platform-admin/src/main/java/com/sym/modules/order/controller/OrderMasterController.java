@@ -3,6 +3,7 @@ package com.sym.modules.order.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.sym.common.aop.NoRepeatSubmit;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,9 @@ public class OrderMasterController {
 
     /**
      * 列表
-     * @param page
-     * @param limit
+     * @param params
+     *              page
+     *              limit
      * @Param shippingUser 收货人姓名
      */
     @GetMapping("/list")
@@ -68,6 +70,7 @@ public class OrderMasterController {
      * 修改
      */
     @RequestMapping("/update")
+    @NoRepeatSubmit(lockTime = 30)
     @RequiresPermissions("order:ordermaster:update")
     public R update(@RequestBody OrderMasterEntity orderMaster){
 		orderMasterService.updateById(orderMaster);
