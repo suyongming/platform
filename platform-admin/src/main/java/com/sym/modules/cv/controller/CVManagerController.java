@@ -3,7 +3,6 @@ package com.sym.modules.cv.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.sym.common.utils.*;
 import com.sym.config.FaceRecognConfig;
-import com.sym.modules.app.entity.UserEntity;
 import com.sym.modules.cv.service.CvFaceVerifyService;
 import com.sym.modules.cv.vo.FaceVerifyVO;
 import com.sym.modules.sys.controller.AbstractController;
@@ -12,12 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @author suyongming
@@ -33,7 +29,7 @@ public class CVManagerController extends AbstractController {
     private CvFaceVerifyService cvFaceVerifyService;
 
     @Autowired
-    private FaceCVUtils faceCVUtils;
+    private OpenCVUtils openCVUtils;
 
     @GetMapping(value = "/face/test")
     public String tes(String img, String img1) throws Exception {
@@ -42,11 +38,11 @@ public class CVManagerController extends AbstractController {
 
 
         // 人脸检测调用
-        FaceDetectResult fDetectResult = faceCVUtils.faceDetect(netImg);
+        FaceDetectResult fDetectResult = openCVUtils.faceDetect(netImg);
         System.out.println(JSONObject.toJSONString(fDetectResult));
 
         // 人脸对比调用
-        FaceVerifyResult fVerifyResult = faceCVUtils.faceVerify(netImg, netImg1);
+        FaceVerifyResult fVerifyResult = openCVUtils.faceVerify(netImg, netImg1);
         System.out.println(JSONObject.toJSONString(fVerifyResult));
         return JSONObject.toJSONString(getUser());
     }

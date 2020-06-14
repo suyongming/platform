@@ -16,12 +16,12 @@ import java.util.Date;
  */
 @Slf4j
 public class FileUtils {
-    public static final String FILE_PATH = "D:\\image\\upload\\" + new SimpleDateFormat("HHmmss").format(new Date()) + "\\";//文件指定存放的路径
+    public static final String FILE_PATH = "D:\\image\\upload\\" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "\\";//文件指定存放的路径
 
     /**
      * @Param filename
      * @Param file
-     *
+     *SimpleDateFormat
      * @return filePath + filename
      * */
     public static String executeUpload(String filename ,MultipartFile file) throws Exception {

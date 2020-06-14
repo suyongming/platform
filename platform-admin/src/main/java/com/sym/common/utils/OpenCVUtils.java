@@ -46,7 +46,7 @@ import java.util.UUID;
 @Data
 @Configuration
 @Slf4j
-public class FaceCVUtils {
+public class OpenCVUtils {
     @Autowired
     private FaceRecognConfig faceRecognConfig;
 

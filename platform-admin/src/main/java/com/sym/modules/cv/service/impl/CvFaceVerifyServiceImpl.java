@@ -1,31 +1,16 @@
 package com.sym.modules.cv.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.exceptions.ServerException;
-import com.aliyuncs.green.model.v20180509.ImageSyncScanRequest;
-import com.aliyuncs.http.FormatType;
-import com.aliyuncs.http.HttpResponse;
-import com.aliyuncs.http.MethodType;
-import com.aliyuncs.http.ProtocolType;
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
 import com.sym.common.exception.CustomException;
 import com.sym.common.utils.*;
 import com.sym.modules.cv.vo.FaceVerifyVO;
-import com.sym.modules.oss.cloud.CloudStorageService;
 import com.sym.modules.oss.cloud.OSSFactory;
 import com.sym.modules.sys.entity.SysUserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -36,7 +21,6 @@ import com.sym.modules.cv.dao.CvFaceVerifyDao;
 import com.sym.modules.cv.entity.CvFaceVerifyEntity;
 import com.sym.modules.cv.service.CvFaceVerifyService;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -46,7 +30,7 @@ public class CvFaceVerifyServiceImpl extends ServiceImpl<CvFaceVerifyDao, CvFace
 
 
     @Autowired
-    private FaceCVUtils faceCVUtils;
+    private OpenCVUtils openCVUtils;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -116,7 +100,7 @@ public class CvFaceVerifyServiceImpl extends ServiceImpl<CvFaceVerifyDao, CvFace
 
     @Override
     public R httpsOCR(String url) throws ClientException {
-        JSONObject result = faceCVUtils.httpsOCR(url);
+        JSONObject result = openCVUtils.httpsOCR(url);
         if(result.get("code").equals("200")){
             R.ok().put("data",result);
         }
@@ -125,12 +109,14 @@ public class CvFaceVerifyServiceImpl extends ServiceImpl<CvFaceVerifyDao, CvFace
 
     @Override
     public R localOCR(String url) throws ClientException {
-        JSONObject result = faceCVUtils.localOCR(url);
+        R result = R.ok();
+        JSONObject ocrResult = openCVUtils.localOCR(url);
         if(result == null){
             return R.error("识别失败");
         }
-
-        return R.ok().put("data",result );
+        result.put("imgUrl", url);
+        result.put("data",ocrResult );
+        return result;
     }
 
 }
