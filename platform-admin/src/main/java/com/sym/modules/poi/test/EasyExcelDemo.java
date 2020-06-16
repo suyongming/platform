@@ -14,11 +14,10 @@ import java.util.List;
  * @date 2020/6/16 14:38
  */
 public class EasyExcelDemo {
-    private static final String READ_PATH = "C:\\Users\\suyon\\file\\20200616.xlsx";
+    private static final String READ_PATH = "C:\\Users\\suyon\\file\\20200616bs.xlsx";
     public static void main(String[] args) throws FileNotFoundException {
 
         readLocalExcel();
-
     }
 
     /**
@@ -26,7 +25,7 @@ public class EasyExcelDemo {
      * */
     private static void readLocalExcel() throws FileNotFoundException {
         // EasyExcel 写法
-        Sheet sheet = new Sheet(1, 1, GraphicsPushHistoryEasyExcelDTO.class);
+        Sheet sheet = new Sheet(1, 2, GraphicsPushHistoryEasyExcelDTO.class);
         List list = EasyExcelFactory.read(new FileInputStream(READ_PATH) , sheet);
         list.forEach(System.out::println);
 
