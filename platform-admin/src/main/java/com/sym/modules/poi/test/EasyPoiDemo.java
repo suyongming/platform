@@ -26,9 +26,10 @@ public class EasyPoiDemo {
     }
 
     /**
-     * 读取本地Excel
+     * 读取本地Excel Demo
+     * 主要用于本地练习
      */
-    private static void readLocalExcel() throws Exception {
+    public static List<GraphicsPushHistoryExcelPoiDTO> readLocalExcel() throws Exception {
         // EasyExcel 写法
         //必须要有HeaderRows？
         List<GraphicsPushHistoryExcelPoiDTO> graphicHistories = EasyPoiUtils.importExcel(READ_PATH, 1,1,GraphicsPushHistoryExcelPoiDTO.class);
@@ -43,9 +44,6 @@ public class EasyPoiDemo {
         System.out.println(filteredList.size());
 
         filteredList.forEach(System.out::println);
-
-
-
-
+        return filteredList;
     }
 }
