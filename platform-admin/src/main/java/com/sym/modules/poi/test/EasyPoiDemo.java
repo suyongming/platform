@@ -31,16 +31,25 @@ public class EasyPoiDemo {
      */
     public static List<GraphicsPushHistoryExcelPoiDTO> readLocalExcel() throws Exception {
         // EasyExcel 写法
-        //必须要有HeaderRows？
-        List<GraphicsPushHistoryExcelPoiDTO> graphicHistories = EasyPoiUtils.importExcel(READ_PATH, 1,1,GraphicsPushHistoryExcelPoiDTO.class);
+        //必须要有HeaderRows?
+        List<GraphicsPushHistoryExcelPoiDTO> graphicHistories = EasyPoiUtils.importExcel(READ_PATH, 1, 1, GraphicsPushHistoryExcelPoiDTO.class);
 
-        System.out.println("过滤前count:"+graphicHistories.size());
+        System.out.println("过滤前count:" + graphicHistories.size());
         // 去重   确保组合唯一条件: 外部系统Id,图文Id,推送Id
         List<GraphicsPushHistoryExcelPoiDTO> filteredList = graphicHistories.stream().collect(
-                Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(
-                        s -> s.getDestinationSystemType() + s.getMediaId() + s.getMsgDataId()))), ArrayList::new));
+                Collectors.collectingAndThen(
+                        Collectors.toCollection(
+                                () -> new TreeSet<>(
+                                        Comparator.comparing(
+                                                s -> s.getDestinationSystemType() + s.getMsgDataId()
+                                        )
+                                )
+                        ),
+                        ArrayList::new
+                )
+        );
 
-        System.out.println("过滤后count:"+filteredList.size());
+        System.out.println("过滤后count:" + filteredList.size());
         System.out.println(filteredList.size());
 
         filteredList.forEach(System.out::println);
