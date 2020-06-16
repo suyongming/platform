@@ -35,7 +35,7 @@ public class EasyPoiDemo {
         List<GraphicsPushHistoryExcelPoiDTO> graphicHistories = EasyPoiUtils.importExcel(READ_PATH, 1, 1, GraphicsPushHistoryExcelPoiDTO.class);
 
         System.out.println("过滤前count:" + graphicHistories.size());
-        // 去重   确保组合唯一条件: 外部系统Id,图文Id,推送Id
+        // 根据 外部系统Id,图文Id,推送Id 组合唯一条件去重,去重时 保留老的一条数据
         List<GraphicsPushHistoryExcelPoiDTO> filteredList = graphicHistories.stream().collect(
                 Collectors.collectingAndThen(
                         Collectors.toCollection(
@@ -52,7 +52,6 @@ public class EasyPoiDemo {
         System.out.println("过滤后count:" + filteredList.size());
         System.out.println(filteredList.size());
 
-        filteredList.forEach(System.out::println);
         return filteredList;
     }
 }
