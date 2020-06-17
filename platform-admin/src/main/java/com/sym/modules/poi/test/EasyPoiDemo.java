@@ -4,6 +4,8 @@ import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.metadata.Sheet;
+import com.alibaba.fastjson.JSONObject;
+import com.sym.modules.poi.dto.GraphicResultPushEasyPoiDTO;
 import com.sym.modules.poi.dto.GraphicsPushHistoryExcelPoiDTO;
 import com.sym.modules.poi.util.EasyPoiUtils;
 
@@ -20,9 +22,11 @@ import java.util.stream.Collectors;
  */
 public class EasyPoiDemo {
     private static final String READ_PATH = "C:\\Users\\suyon\\file\\20200616bs.xlsx";
+    private static final String KAFKA_PUSH_READ_PATH = "C:\\Users\\suyon\\file\\20200617.xlsx";
 
     public static void main(String[] args) throws Exception {
-        readLocalExcel();
+//        readLocalExcel();
+        readLocalExcel2();
     }
 
     /**
@@ -53,5 +57,25 @@ public class EasyPoiDemo {
         System.out.println(filteredList.size());
 
         return filteredList;
+    }
+
+    public static void readLocalExcel2() {
+        List<GraphicResultPushEasyPoiDTO> pushRecords = EasyPoiUtils.importExcel(KAFKA_PUSH_READ_PATH, 1, 1, GraphicResultPushEasyPoiDTO.class);
+        Map<String, List<GraphicResultPushEasyPoiDTO>> recordsGroupByMediaId = pushRecords.stream()
+                .limit(300)
+                .collect(
+                        Collectors.groupingBy(
+                                GraphicResultPushEasyPoiDTO::getMediaId
+                        )
+                );
+
+
+        System.out.println(JSONObject.toJSONString(recordsGroupByMediaId));
+        // recordsGroupByBatch.forEach((k,v)->{
+        //     System.out.println("k:"+k+":\nv:"+v);
+        // });
+
+        // doGetSendInfo(recordsGroupByBatch);
+
     }
 }
