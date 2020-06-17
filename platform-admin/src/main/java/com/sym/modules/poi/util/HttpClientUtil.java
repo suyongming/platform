@@ -28,7 +28,9 @@ import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLHandshakeException;
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -235,5 +237,33 @@ public class HttpClientUtil {
         }
 
         return resultString;
+    }
+
+    /**
+     * http请求时带特殊字符则需要转码
+     * */
+    public static String ecode (String url){
+        //被转码后的url
+        String result = "";
+        //需要转码的url
+
+        int index = url.indexOf("?");
+        result = url.substring(0,index+1);
+        String temp = url.substring(index+1);
+        try {
+            //URLEncode转码会将& ： / = 等一些特殊字符转码,(但是这个字符  只有在作为参数值  时需要转码;例如url中的&具有参数连接的作用，此时就不能被转码)
+            String encode = URLEncoder.encode(temp, "utf-8");
+            System.out.println(encode);
+            encode = encode.replace("%3D",  "=");
+            encode = encode.replace("%2F", "/");
+            encode = encode.replace("+", "%20");
+            encode = encode.replace("%26", "&");
+            result += encode;
+            System.out.println("转码后的url:"+result);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
