@@ -2,6 +2,7 @@ package com.sym.modules.poi.demo;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.sym.modules.poi.util.EasyPoiUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -26,9 +27,7 @@ public class LiGuangYong {
 
         System.out.println(audios.size());
         Map<String,List<LiGuangYongDTO>> audiosGroupByPolicyNo = audios.stream().collect(
-                Collectors.groupingBy(
-                        LiGuangYongDTO::getPolicyNo
-                )
+                Collectors.groupingBy(LiGuangYongDTO::getPolicyNo)
         );
 
         String jsonString = JSONObject.toJSONString(audiosGroupByPolicyNo);
