@@ -2,6 +2,7 @@
 
 package com.sym.common.utils;
 
+import com.sym.common.enums.ErrorEnum;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class R extends HashMap<String, Object> {
 	}
 	
 	public static R error() {
-		return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, "未知异常，请联系管理员");
+		return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, ErrorEnum.SC_INTERNAL_SERVER_ERROR.getDesc());
 	}
 	
 	public static R error(String msg) {
@@ -51,6 +52,7 @@ public class R extends HashMap<String, Object> {
 		return new R();
 	}
 
+	@Override
 	public R put(String key, Object value) {
 		super.put(key, value);
 		return this;

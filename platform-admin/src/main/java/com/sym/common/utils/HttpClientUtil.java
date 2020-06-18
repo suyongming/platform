@@ -1,4 +1,4 @@
-package com.sym.modules.poi.util;
+package com.sym.common.utils;
 
 import org.apache.http.*;
 import org.apache.http.client.HttpRequestRetryHandler;
@@ -43,7 +43,7 @@ import java.util.Map;
 public class HttpClientUtil {
 
     // org.apache.http.impl.client.CloseableHttpClient
-    private static CloseableHttpClient httpclient = null;
+    private static volatile CloseableHttpClient httpclient = null;
 
     // 这里就直接默认固定了,因为以下三个参数在新建的method中仍然可以重新配置并被覆盖.
     static final int connectionRequestTimeout = 5000;// ms毫秒,从池中获取链接超时时间

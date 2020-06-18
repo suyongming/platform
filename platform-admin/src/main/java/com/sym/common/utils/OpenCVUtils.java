@@ -214,8 +214,9 @@ public class OpenCVUtils {
      * @return 加密之后的字符串
      */
     String MD5Base64(String s) {
-        if (s == null)
+        if (s == null) {
             return null;
+        }
         String encodeStr = "";
         byte[] utfBytes = s.getBytes();
         MessageDigest mdTemp;

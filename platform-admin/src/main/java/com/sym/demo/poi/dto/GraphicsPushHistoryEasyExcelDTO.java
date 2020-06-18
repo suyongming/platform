@@ -1,4 +1,4 @@
-package com.sym.modules.poi.dto;
+package com.sym.demo.poi.dto;
 
 /**
  * @author yongming.su
@@ -6,7 +6,6 @@ package com.sym.modules.poi.dto;
  * @date 2020/6/16 14:26
  */
 
-import cn.afterturn.easypoi.excel.annotation.ExcelTarget;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
 import com.fasterxml.jackson.annotation.JsonFormat;

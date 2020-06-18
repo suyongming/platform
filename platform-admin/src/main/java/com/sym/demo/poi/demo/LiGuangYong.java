@@ -1,8 +1,8 @@
-package com.sym.modules.poi.demo;
+package com.sym.demo.poi.demo;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.sym.modules.poi.util.EasyPoiUtils;
+import com.sym.common.utils.poi.EasyPoiUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

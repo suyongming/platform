@@ -1,4 +1,4 @@
-package com.sym.modules.poi.util;
+package com.sym.common.utils.poi;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
@@ -37,7 +37,9 @@ public class EasyPoiUtils {
     private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName,
                                       HttpServletResponse response, ExportParams exportParams) {
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams,pojoClass,list);
-        if (workbook != null); downLoadExcel(fileName, response, workbook);
+        if (workbook != null) {
+            downLoadExcel(fileName, response, workbook);
+        }
     }
 
     private static void downLoadExcel(String fileName, HttpServletResponse response, Workbook workbook) {
@@ -53,8 +55,9 @@ public class EasyPoiUtils {
 
     private static void defaultExport(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {
         Workbook workbook = ExcelExportUtil.exportExcel(list, ExcelType.HSSF);
-        if (workbook != null);
-        downLoadExcel(fileName, response, workbook);
+        if (workbook != null) {
+            downLoadExcel(fileName, response, workbook);
+        }
     }
 
     public static <T> List<T> importExcel(String filePath,Integer titleRows,Integer headerRows, Class<T> pojoClass){

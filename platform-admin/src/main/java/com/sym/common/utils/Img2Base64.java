@@ -132,8 +132,9 @@ public class Img2Base64 {
 
     //3-Base64解码并生成图片
     public static boolean GenerateImage(String base64str,String savepath) { //对字节数组字符串进行Base64解码并生成图片
-        if (base64str == null) //图像数据为空
+        if (base64str == null) { //图像数据为空
             return false;
+        }
         Base64 decoder = new Base64();
         try {
             //Base64解码

@@ -2,6 +2,7 @@ package com.sym.common.aspect;
 
 import cn.hutool.core.lang.Assert;
 import com.sym.common.aop.NoRepeatSubmit;
+import com.sym.common.enums.ErrorEnum;
 import com.sym.common.redis.RedisLock;
 import com.sym.common.utils.R;
 import com.sym.common.utils.RequestUtils;
@@ -66,7 +67,7 @@ class RepeatSubmitAspect {
         } else {
             // 获取锁失败，认为是重复提交的请求
             log.info("tryLock fail, key = [{}]", key);
-            return R.error( "重复请求，请稍后再试");
+            return R.error(ErrorEnum.DUP_REQUEST_EXCEPTION.getDesc());
         }
 
     }

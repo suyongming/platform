@@ -1,4 +1,4 @@
-package com.sym.modules.poi.util;
+package com.sym.common.utils.poi;
 
 /**
  * @author yongming.su

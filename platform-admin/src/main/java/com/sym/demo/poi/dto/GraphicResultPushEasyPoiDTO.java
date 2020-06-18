@@ -1,7 +1,6 @@
-package com.sym.modules.poi.dto;
+package com.sym.demo.poi.dto;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
-import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
