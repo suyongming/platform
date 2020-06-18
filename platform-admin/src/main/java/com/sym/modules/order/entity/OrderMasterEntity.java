@@ -98,7 +98,7 @@ public class OrderMasterEntity implements Serializable {
 	 */
 	private Date receiveTime;
 	/**
-	 * 订单状态
+	 * 订单状态 未付款,已付款,已发货,已签收,退货申请,退货中,已退货,取消交易
 	 */
 	private Integer orderStatus;
 	/**
