@@ -28,7 +28,7 @@ public class OCRMainLocal {
 
     public static void main(String[] args) throws Exception {
         IClientProfile profile = DefaultProfile
-                .getProfile("cn-shanghai", "LTAIPXQuxFJ7477m", "cUW4bir9z0pBJX05g3ozMytBiVSgWt");
+                .getProfile("cn-shanghai", "LTAIPXQux476231418FJ7477m", "cUW4bir9z0pB476231418JX05g3ozMytBiVSgWt");
 
         DefaultProfile
                 .addEndpoint("cn-shanghai", "cn-shanghai", "Green", "green.cn-shanghai.aliyuncs.com");
