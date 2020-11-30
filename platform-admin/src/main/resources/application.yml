@@ -99,7 +99,7 @@ renren:
     header: token
 
 ali:
-  accessKeyID: LTAIPXQuxFJ7477m
+  accessKeyID: LTAIPXQuxF476231418J7477m
   accessKeySecret: cUW4bir9z0pBJX05g3ozMytBiVSgWt
   #人脸对比API接口调用地址uri
   verifyUrl: https://dtplus-cn-shanghai.data.aliyuncs.com/face/verify
