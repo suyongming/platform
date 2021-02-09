@@ -1,8 +1,7 @@
-package com.sym.demo;
+package com.wuxi.util.demo;
 
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -107,7 +106,7 @@ public class LambdaDemo {
                 // 7.2.1不管什么时候防止空指针是 基本素质
                 .filter(p -> StringUtils.isNotBlank(p.getLastName()) && StringUtils.isNotBlank(p.getFirstName()))
                 // 7.2.2 TODO manyConditions 实现了多条件分组
-                .collect(Collectors.groupingBy(person -> manyConditions(person)));
+                .collect(Collectors.groupingBy(person -> manyConditions(person.getFirstName(),person.getLastName())));
 
         groupByNameMap.forEach((k,v)->{
             if(v.size() > 1) {
@@ -126,9 +125,14 @@ public class LambdaDemo {
 
     /**
      * 多条件grouping by
+     * 可以发现 ElsdonJaycob这个名字 出现了三次
+     * @param param String... 相当于 String[] 多个未知条件
      */
-    private static String manyConditions(Person person) {
-        return person.getFirstName() + person.getLastName();
+    private static String manyConditions(String... param) {
+        // Collectors.joining(",") 可以逗号隔开 返回String
+        String resultConditions = Arrays.stream(param).collect(Collectors.joining());
+        System.out.println("组合条件为:" + resultConditions);
+        return resultConditions;
     }
 
     private static List<Person> javaProgrammers = new ArrayList<Person>() {
