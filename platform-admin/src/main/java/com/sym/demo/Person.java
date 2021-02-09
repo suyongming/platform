@@ -1,4 +1,4 @@
-package com.wuxi.util.demo;
+package com.sym.demo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Data
 @NoArgsConstructor                 //无参构造
 @AllArgsConstructor                //有参构造
-@ToString
+@ToString  //重写toString
 public class Person {
 
     //
