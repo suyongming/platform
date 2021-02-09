@@ -1,5 +1,8 @@
-package com.wuxi.util.demo;
+package com.sym.demo;
 
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,14 +43,92 @@ public class LambdaDemo {
             System.out.printf("性别:%s,他们中最高工资的人是【%s】", k, v.get().toString());
         });
 
-        // 5.找到名重复的(firstName)
+        // 5.list通过filter(e->(age>30 && gender == 男))则保留 所有 30岁以上的男生,
+        List<Person> maleAge30 = javaProgrammers.stream()
+                // 调用equals时 注意先过滤掉哪些可能为空的字段
+                .filter(person -> StringUtils.isNotBlank(person.getGender()))
+                .filter(person-> person.getAge() > 30 && person.getGender().equals("male"))
+                .collect(Collectors.toList());
+        System.out.println();
+        System.out.println("所有30岁以上的男性" + maleAge30);
+
+        /* 6.简单对象取交集和差集
+        * 交集 24
+        * 差集 135 6 (要包含两个List的差集)
+        * */
+        List<String> strList1 = new ArrayList<String>() {{
+            add("1"); add("2"); add("3"); add("4"); add("5");
+        }};
+        List<String> strList2 = new ArrayList<String>() {{
+            add("2"); add("4"); add("6");
+        }};
+
+        List<String> strJiaoji = strList1.stream().filter(
+                str -> strList2.contains(str)
+        ).collect(Collectors.toList());
+        System.out.println("简单交集: " + strJiaoji);
+
+        List<String> str1Chatji = strList1.stream().filter(node -> !strList2.contains(node)).collect(Collectors.toList());
+        List<String> str2Chatji = strList2.stream().filter(node -> !strList1.contains(node)).collect(Collectors.toList());
+        str1Chatji.addAll(str2Chatji);
+        System.out.println("简单差集: " + str1Chatji);
+
+        // TODO 7.找到两个部门下所有同名同姓的程序员【其实就是取交集DTO】(这是多条件 名:firstName ,姓:lastName)
+        // 7.0 先合并各部门下所有人
         List<Person> allProgrammers = new ArrayList<Person>();
         allProgrammers.addAll(javaProgrammers);
         allProgrammers.addAll(phpProgrammers);
 
-        List<String> collect = allProgrammers.stream().map(Person::getFirstName).distinct().collect(Collectors.toList());
-        System.out.println(collect);
+        // 方法一 利用 HashSet + filter 来做
+        HashSet<String> isExits = new HashSet<>();
+        HashSet<String> jiaojiSet = new HashSet<>();
+        allProgrammers.stream()
+                // 7.1.1 如果姓名都不为空 则保留
+                .filter(p -> StringUtils.isNotBlank(p.getLastName()) && StringUtils.isNotBlank(p.getFirstName()))
+                // 7.1.2 利用HashSet的特性 如果add返回 false 则说明他是重复的(这意味这他是交集)
+                .forEach(person -> {
+                    if(isExits.add(person.getFirstName()+person.getLastName()) == false) {
+                        jiaojiSet.add(person.getFirstName()+person.getLastName());
+                    }
+                });
+        // 7.1.3 根据条件取复杂条件的交集
+        List<Person> jiaoji1 = allProgrammers.stream().filter(
+                // 如果需要差集 把【!】删掉即可
+                person -> !jiaojiSet.add(person.getFirstName()+person.getLastName())).collect(Collectors.toList());
+        System.out.printf("复杂对象交集>>>>【%s】", jiaoji1);
+        System.out.println();
 
+
+        // 方法二 利用 lambda 的 GroupingBy来做交集
+        List<Person> jiaoji2 = new ArrayList<>();
+        List<Person> chaji2 = new ArrayList<>();
+
+        Map<String, List<Person>> groupByNameMap = allProgrammers.stream()
+                // 7.2.1不管什么时候防止空指针是 基本素质
+                .filter(p -> StringUtils.isNotBlank(p.getLastName()) && StringUtils.isNotBlank(p.getFirstName()))
+                // 7.2.2 TODO manyConditions 实现了多条件分组
+                .collect(Collectors.groupingBy(person -> manyConditions(person)));
+
+        groupByNameMap.forEach((k,v)->{
+            if(v.size() > 1) {
+                // 7.2.3 如果大于1则说明这个分组下重复了,也就意味着这是交集
+                jiaoji2.addAll(v);
+            } else {
+                chaji2.addAll(v);
+            }
+        });
+
+        System.out.println("基于多条件groupingBy 实现取交集:" + jiaoji2);
+        System.out.println("基于多条件groupingBy 实现取差集:" + chaji2);
+
+
+    }
+
+    /**
+     * 多条件grouping by
+     */
+    private static String manyConditions(Person person) {
+        return person.getFirstName() + person.getLastName();
     }
 
     private static List<Person> javaProgrammers = new ArrayList<Person>() {
@@ -67,15 +148,15 @@ public class LambdaDemo {
 
     private static List<Person> phpProgrammers = new ArrayList<Person>() {
         {
-            add(new Person("Elsdon", "Pace", "PHP programmer", "male", 34, 1550));
+            add(new Person("Elsdon", "Jaycob", "PHP programmer", "male", 34, 1550));
             add(new Person("Clarette", "Cicely", "PHP programmer", "female", 23, 1200));
-            add(new Person("Victor", "Channing", "PHP programmer", "male", 32, 1600));
+            add(new Person("Elsdon", "Channing", "PHP programmer", "male", 32, 1600));
             add(new Person("Tori", "Sheryl", "PHP programmer", "female", 21, 1000));
             add(new Person("Floyd", "Shad", "PHP programmer", "male", 32, 1100));
             add(new Person("Rosalind", "Layla", "PHP programmer", "female", 25, 1300));
             add(new Person("Fraser", "Hewie", "PHP programmer", "male", 36, 1100));
             add(new Person("Quinn", "Tamara", "PHP programmer", "female", 21, 1000));
-            add(new Person("Alvin", "Lance", "PHP programmer", "male", 38, 1600));
+            add(new Person("Elsdon", "Jaycob", "PHP programmer", "male", 38, 1600));
             add(new Person("Evonne", "Shari", "PHP programmer", "female", 40, 1800));
         }
     };
