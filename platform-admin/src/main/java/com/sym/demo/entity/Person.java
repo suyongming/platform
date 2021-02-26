@@ -1,4 +1,4 @@
-package com.sym.demo;
+package com.sym.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -27,7 +27,7 @@ import java.util.UUID;
 public class OCRMainURL {
     public static void main(String[] args) throws Exception {
         IClientProfile profile = DefaultProfile
-                .getProfile("cn-shanghai", "LTAIPXQuxFJ7477m", "cUW4bir9z0pBJX05g3ozMytBiVSgWt");
+                .getProfile("cn-shanghai", "LTAIPXQuxF476231418J7477m", "cUW4bir9z0pBJX05g3ozMytBiVSgWt");
         DefaultProfile
                 .addEndpoint("cn-shanghai", "cn-shanghai", "Green", "green.cn-shanghai.aliyuncs.com");
         IAcsClient client = new DefaultAcsClient(profile);
