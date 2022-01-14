@@ -3,7 +3,10 @@ package com.sym.common.utils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sym.demo.entity.Person;
+import org.apache.commons.lang.StringUtils;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.*;
 
 /**
@@ -16,24 +19,22 @@ public class Demo {
         // 下面数据中有两个 开发人员叫 Addison 的, 因为是jdk17 这样去重
         Set<String> firstNames = new HashSet<>();
         // 去重后的集合
-        List<Person> distinctList = new ArrayList<>();
-        System.out.println("原本有" + javaProgrammers.size() + "条");
 
         // 普通for,记得对数组判空
         for (int i = 0; i < javaProgrammers.size(); i++) {
             Person person = javaProgrammers.get(i);
-            if(firstNames.add(person.getFirstName())) {
-                distinctList.add(person);
+            // 干掉重复的 名字叫Addison的家伙 多条件多条件多条件！！！  Addison 一共有三位
+            if(firstNames.add(person.getFirstName()) == false) {
+                System.out.println("重复了：》》》》》》》》" + person.getFirstName());
             }
         }
-
-        System.out.println("根据条件去重后" + distinctList.size() + "条");
 
 
     }
 
     private static List<Person> javaProgrammers = new ArrayList<Person>() {
         {
+            add(new Person("Addison", "Jaycob", "Java programmer", "male", 43, 2000));
             add(new Person("Addison", "Jaycob", "Java programmer", "male", 43, 2000));
             add(new Person("Tamsen", "Brittany", "Java programmer", "female", 23, 1500));
             add(new Person("Floyd", "Donny", "Java programmer", "male", 33, 1800));

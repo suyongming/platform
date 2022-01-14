@@ -3,7 +3,7 @@ package com.sym.demo.poi.test;
 import com.alibaba.fastjson.JSONObject;
 import com.sym.demo.poi.dto.GraphicResultPushEasyPoiDTO;
 import com.sym.demo.poi.dto.GraphicsPushHistoryExcelPoiDTO;
-import com.sym.common.utils.poi.EasyPoiUtils;
+import com.sym.common.utils.poi.EasyPoiUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,7 +29,7 @@ public class EasyPoiDemo {
     public static List<GraphicsPushHistoryExcelPoiDTO> readLocalExcel() throws Exception {
         // EasyExcel 写法
         //必须要有HeaderRows?
-        List<GraphicsPushHistoryExcelPoiDTO> graphicHistories = EasyPoiUtils.importExcel(READ_PATH, 1, 1, GraphicsPushHistoryExcelPoiDTO.class);
+        List<GraphicsPushHistoryExcelPoiDTO> graphicHistories = EasyPoiUtil.importExcel(READ_PATH, 1, 1, GraphicsPushHistoryExcelPoiDTO.class);
 
         System.out.println("过滤前count:" + graphicHistories.size());
         // 根据 外部系统Id,图文Id,推送Id 组合唯一条件去重,去重时 保留老的一条数据
@@ -53,7 +53,7 @@ public class EasyPoiDemo {
     }
 
     public static void readLocalExcel2() {
-        List<GraphicResultPushEasyPoiDTO> pushRecords = EasyPoiUtils.importExcel(KAFKA_PUSH_READ_PATH, 1, 1, GraphicResultPushEasyPoiDTO.class);
+        List<GraphicResultPushEasyPoiDTO> pushRecords = EasyPoiUtil.importExcel(KAFKA_PUSH_READ_PATH, 1, 1, GraphicResultPushEasyPoiDTO.class);
         Map<String, List<GraphicResultPushEasyPoiDTO>> recordsGroupByMediaId = pushRecords.stream()
                 .limit(300)
                 .collect(

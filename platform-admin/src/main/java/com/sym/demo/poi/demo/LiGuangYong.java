@@ -2,7 +2,7 @@ package com.sym.demo.poi.demo;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.sym.common.utils.poi.EasyPoiUtils;
+import com.sym.common.utils.poi.EasyPoiUtil;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -20,7 +20,7 @@ public class LiGuangYong {
     private static final String LIGUANGYONG = "C:\\temp\\宁波索引文件.xlsx";
 
     public static void main(String[] args) throws IOException {
-        List<LiGuangYongDTO> audios = EasyPoiUtils.importExcel(LIGUANGYONG, 1, 1, LiGuangYongDTO.class);
+        List<LiGuangYongDTO> audios = EasyPoiUtil.importExcel(LIGUANGYONG, 1, 1, LiGuangYongDTO.class);
 //        String strUrl = "http://mao.metlife.cn:81/jplayer/index.html?filepath=\\\\10.165.1.155\\New Recordings2\\vox\\大都会\\大都会_20191107\\20191107\\\\\\e0306220191107152806.wav&&type=wav&&site=BOCOM交通银行";
 //        strUrl = ecode(strUrl);
 //        String result = HttpClientUtil.get(strUrl);

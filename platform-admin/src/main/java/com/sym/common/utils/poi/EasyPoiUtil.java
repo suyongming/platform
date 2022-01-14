@@ -10,14 +10,20 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class EasyPoiUtils {
+/**
+* @Description:
+* @Param:
+* @return:
+* @Author: sym
+* @Date: 2021/9/18
+*/
+public class EasyPoiUtil {
     public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass,
                                    String fileName, boolean isCreateHeader, HttpServletResponse response){
         ExportParams exportParams = new ExportParams(title, sheetName);
@@ -32,6 +38,21 @@ public class EasyPoiUtils {
 
     public static void exportExcel(List<Map<String, Object>> list, String fileName, HttpServletResponse response){
         defaultExport(list, fileName, response);
+    }
+
+    private InputStream inputStreamExport(List<?> list, Class<?> pojoClass, String fileName, ExportParams exportParams) {
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,pojoClass,list);
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            workbook.write(bos);
+            byte[] byteArray = bos.toByteArray();
+            InputStream is = new ByteArrayInputStream(byteArray);
+            return is;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName,
@@ -91,7 +112,6 @@ public class EasyPoiUtils {
             // throw new NormalException("excel文件不能为空");
         } catch (Exception e) {
             //throw new NormalException(e.getMessage());
-            System.out.println(e.getMessage());
         }
         return list;
     }

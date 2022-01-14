@@ -1,10 +1,6 @@
 package com.sym.common.utils.poi;
 
-/**
- * @author yongming.su
- * @version 1.0
- * @date 2020/6/16 13:55
- */
+
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.context.AnalysisContext;
@@ -24,9 +20,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @description:
- * @author: chenmingjian
- * @date: 19-3-18 16:16
+ * @author yongming.su
+ * @version 1.0
+ * @date 2020/6/16 13:55
  */
 @Slf4j
 public class EasyExcelUtil {
@@ -125,7 +121,7 @@ public class EasyExcelUtil {
 
     /**
      * 生成excle
-     * @param filePath  绝对路径, 如：/home/chenmingjian/Downloads/aaa.xlsx
+     * @param filePath  绝对路径, 如：/home/suyongming/Downloads/aaa.xlsx
      * @param data 数据源
      * @param head 表头
      */
@@ -135,7 +131,7 @@ public class EasyExcelUtil {
 
     /**
      * 生成excle
-     * @param filePath 绝对路径, 如：/home/chenmingjian/Downloads/aaa.xlsx
+     * @param filePath 绝对路径, 如：/home/suyongming/Downloads/aaa.xlsx
      * @param data 数据源
      * @param sheet excle页面样式
      * @param head 表头
@@ -176,7 +172,7 @@ public class EasyExcelUtil {
 
     /**
      * 生成excle
-     * @param filePath 绝对路径, 如：/home/chenmingjian/Downloads/aaa.xlsx
+     * @param filePath 绝对路径, 如：/home/suyongming/Downloads/aaa.xlsx
      * @param data 数据源
      */
     public static void writeWithTemplate(String filePath, List<? extends BaseRowModel> data){
@@ -185,7 +181,7 @@ public class EasyExcelUtil {
 
     /**
      * 生成excle
-     * @param filePath 绝对路径, 如：/home/chenmingjian/Downloads/aaa.xlsx
+     * @param filePath 绝对路径, 如：/home/suyongming/Downloads/aaa.xlsx
      * @param data 数据源
      * @param sheet excle页面样式
      */
@@ -223,7 +219,7 @@ public class EasyExcelUtil {
 
     /**
      * 生成多Sheet的excle
-     * @param filePath 绝对路径, 如：/home/chenmingjian/Downloads/aaa.xlsx
+     * @param filePath 绝对路径, 如：/home/suyongming/Downloads/aaa.xlsx
      * @param multipleSheelPropetys
      */
     public static void writeWithMultipleSheel(String filePath,List<MultipleSheelPropety> multipleSheelPropetys){
@@ -278,7 +274,7 @@ public class EasyExcelUtil {
      * 每解析一行会回调invoke()方法。
      * 整个excel解析结束会执行doAfterAllAnalysed()方法
      *
-     * @author: chenmingjian
+     * @author: suyongming
      * @date: 19-4-3 14:11
      */
     @Getter
