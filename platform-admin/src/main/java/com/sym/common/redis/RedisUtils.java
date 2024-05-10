@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -71,6 +73,48 @@ public class RedisUtils {
 
     public void delete(String key) {
         redisTemplate.delete(key);
+    }
+
+
+    /**
+     * 设置过期时间 by key
+     * @param key
+     * @param date 到期时间
+     */
+    public void expireAt(String key, Date date) {
+        valueOperations.getOperations().expireAt(key, date);
+    }
+
+    /**
+     * zSet score降序
+     *
+     * "key" : [{"obj3", 3},{"obj2", 2},{"obj1", 1}]
+     *
+     * @param key
+     * @param obj
+     * @param score 分数
+     */
+    public void zSetOperationsAdd(String key, String obj, long score) {
+        zSetOperations.add(key, obj, score);
+    }
+
+    /**
+     * zSet 删除
+     */
+    public void zSetOperationsRemove(String key, String messageId) {
+        zSetOperations.remove(key, messageId);
+    }
+
+
+    /**
+     * key min max
+     * key min max
+     * @param key
+     * @param min
+     * @param max
+     */
+    public Set<Object> rangeByScore(String key, int min, long max) {
+        return zSetOperations.rangeByScore(key, min , max);
     }
 
     /**

@@ -32,6 +32,19 @@ spring:
                 wall:
                     config:
                         multi-statement-allow: true
+    redis:
+        database: 30
+        host: r-uf6f3pi7nvlgaizw32pd.redis.rds.aliyuncs.com
+        password: SQrHt9pkv32kKbF
+        port: 56379
+        timeout: 30000ms
+        lettuce:
+            pool:
+                max-active: 8
+                max-wait: 10000ms
+                max-idle: 8
+                min-idle: 0
+            shutdown-timeout: 100ms
 
 
 ##多数据源的配置
