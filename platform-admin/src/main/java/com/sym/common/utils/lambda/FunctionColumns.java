@@ -1,16 +1,6 @@
 package com.sym.common.utils.lambda;
 
 /**
- * @description
- * @Author: sym
- * @Date: 2022/1/14 11:19
- */
-
-import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
-import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
-
-/**
  *尝试使用函数获取字段的名字，减少魔法值错误
  *  函数式获取字段名称
  * @param <T>
@@ -74,4 +64,3 @@ public class FunctionColumns<T> {
         return true;
     }
 }
-

@@ -1,7 +1,6 @@
 package com.sym.common.utils.lambda;
 
-
-import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import cn.hutool.core.util.StrUtil;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Arrays;
@@ -70,6 +69,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      * @return
      */
     public ExampleLambda<T> andEqualTo(SFunction<T, ?> tsFunction, Object value) {
+        if(Objects.isNull(value)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.andEqualTo(columnToString(tsFunction), value);
         return this;
     }
@@ -84,6 +86,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      */
     public ExampleLambda<T> andEqualTo(boolean condition, SFunction<T, ?> tsFunction, Object value) {
         if (condition) {
+            if(Objects.isNull(value)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.andEqualTo(columnToString(tsFunction), value);
         }
         return this;
@@ -97,6 +102,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      * @return
      */
     public ExampleLambda<T> andNotEqualTo(SFunction<T, ?> tsFunction, Object value) {
+        if(Objects.isNull(value)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.andNotEqualTo(columnToString(tsFunction), value);
         return this;
     }
@@ -110,6 +118,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      */
     public ExampleLambda<T> andNotEqualTo(boolean condition, SFunction<T, ?> tsFunction, Object value) {
         if (condition) {
+            if(Objects.isNull(value)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.andNotEqualTo(columnToString(tsFunction), value);
         }
         return this;
@@ -123,6 +134,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      * @return
      */
     public ExampleLambda<T> andIn(SFunction<T, ?> tsFunction, List values) {
+        if(Objects.isNull(values)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.andIn(columnToString(tsFunction), values);
         return this;
     }
@@ -137,6 +151,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      */
     public ExampleLambda<T> andIn(boolean condition, SFunction<T, ?> tsFunction, List values) {
         if (condition) {
+            if(Objects.isNull(values)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.andIn(columnToString(tsFunction), values);
         }
         return this;
@@ -150,6 +167,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      * @return
      */
     public ExampleLambda<T> andGe(SFunction<T, ?> tsFunction, Object value) {
+        if(Objects.isNull(value)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.andGreaterThanOrEqualTo(columnToString(tsFunction), value);
         return this;
     }
@@ -163,6 +183,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      */
     public ExampleLambda<T> andGe(boolean condition, SFunction<T, ?> tsFunction, Object value) {
         if (condition) {
+            if(Objects.isNull(value)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.andGreaterThanOrEqualTo(columnToString(tsFunction), value);
         }
         return this;
@@ -176,6 +199,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      * @return
      */
     public ExampleLambda<T> andLe(SFunction<T, ?> tsFunction, Object value) {
+        if(Objects.isNull(value)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.andLessThanOrEqualTo(columnToString(tsFunction), value);
         return this;
     }
@@ -189,6 +215,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      */
     public ExampleLambda<T> andLe(boolean condition, SFunction<T, ?> tsFunction, Object value) {
         if (condition) {
+            if(Objects.isNull(value)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.andLessThanOrEqualTo(columnToString(tsFunction), value);
         }
         return this;
@@ -203,6 +232,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      * @return
      */
     public ExampleLambda<T> andNotIn(SFunction<T, ?> tsFunction, List values) {
+        if(Objects.isNull(values)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.andNotIn(columnToString(tsFunction), values);
         return this;
     }
@@ -217,6 +249,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      */
     public ExampleLambda<T> andNotIn(boolean condition, SFunction<T, ?> tsFunction, List values) {
         if (condition) {
+            if(Objects.isNull(values)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.andNotIn(columnToString(tsFunction), values);
         }
         return this;
@@ -230,6 +265,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      * @return
      */
     public ExampleLambda<T> andLike(SFunction<T, ?> tsFunction, String value) {
+        if(Objects.isNull(value)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.andLike(columnToString(tsFunction), "%" + value + "%");
         return this;
     }
@@ -242,6 +280,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      */
     public ExampleLambda<T> orLike(boolean condition, SFunction<T, ?> tsFunction, String value) {
         if(condition) {
+            if(Objects.isNull(value)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.orLike(columnToString(tsFunction), "%" + value + "%");
         }
         return this;
@@ -257,24 +298,36 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      */
     public ExampleLambda<T> andLike(boolean condition, SFunction<T, ?> tsFunction, String value) {
         if (condition) {
+            if(Objects.isNull(value)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.andLike(columnToString(tsFunction), "%" + value + "%");
         }
         return this;
     }
 
     public ExampleLambda<T> or(SFunction<T, ?> tsFunction, Object value) {
+        if(Objects.isNull(value)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.orEqualTo(columnToString(tsFunction), value);
         return this;
     }
 
     public ExampleLambda<T> or(boolean condition, SFunction<T, ?> tsFunction, Object value) {
         if (condition) {
+            if(Objects.isNull(value)) {
+                return isNull(tsFunction);
+            }
             criteria = this.criteria.orEqualTo(columnToString(tsFunction), value);
         }
         return this;
     }
 
     public ExampleLambda<T> orLike(SFunction<T, ?> tsFunction, String value) {
+        if(Objects.isNull(value)) {
+            return isNull(tsFunction);
+        }
         criteria = this.criteria.orLike(columnToString(tsFunction), value);
         return this;
     }
@@ -285,6 +338,9 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
      * @return
      */
     public ExampleLambda<T> apply(String appendSql) {
+        if(StrUtil.isBlank(appendSql)) {
+            return this;
+        }
         criteria = this.criteria.andCondition(appendSql);
         return this;
     }
@@ -301,8 +357,28 @@ public class ExampleLambda<T> extends FunctionColumns<T> {
         return this;
     }
 
+    /**
+     * 执行是空
+     * @param condition
+     * @param tsFunction
+     * @return
+     */
+    public ExampleLambda<T> isNull(boolean condition, SFunction<T, ?> tsFunction) {
+        if(condition) {
+            criteria = this.criteria.andIsNull(columnToString(tsFunction));
+        }
+        return this;
+    }
 
-
+    /**
+     * 执行是空
+     * @param tsFunction
+     * @return
+     */
+    public ExampleLambda<T> isNull(SFunction<T, ?> tsFunction) {
+       criteria = this.criteria.andIsNull(columnToString(tsFunction));
+       return this;
+    }
 
     /**
      * mysql sort
