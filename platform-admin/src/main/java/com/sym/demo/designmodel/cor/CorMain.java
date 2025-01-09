@@ -23,23 +23,25 @@ public class CorMain {
     * @Date: 2022/11/1
     */
     public static void main(String[] args) {
-        OrderHandlerContext context = new OrderHandlerContext();
-        context.setOrderReq(OrderReq.builder().orderNo("123").build());
 
+        if(false||true) {
+            System.out.println(11111);
 
-        OrderBaseHandler.Builder builder = new OrderBaseHandler.Builder();
+        } else {
+            System.out.println(22222);
+        }
 
-
-        builder
-                .addHandler(orderSubmitHandler)
-                .addHandler(cacheOrderHandler)
-                .build().doHandler(context);
-
-
-
-
-
-
+//        OrderHandlerContext context = new OrderHandlerContext();
+//        context.setOrderReq(OrderReq.builder().orderNo("123").build());
+//
+//
+//        OrderBaseHandler.Builder builder = new OrderBaseHandler.Builder();
+//
+//
+//        builder
+//                .addHandler(orderSubmitHandler)
+//                .addHandler(cacheOrderHandler)
+//                .build().doHandler(context);
 
     }
 }

@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 
 /**
  * Created by su_yongming on 2021/2/8.
+ *
+ * stream 流和I/O流不同, 他只是
  */
 public class LambdaDemo {
 
@@ -126,7 +128,7 @@ public class LambdaDemo {
         List<Person> chaji2 = new ArrayList<>();
 
         Map<String, List<Person>> groupByNameMap = allProgrammers.stream()
-                // 8.2.1不管什么时候防止空指针是 基本素质
+                // 8.2.1不管什么时候防止空指针是
                 .filter(p -> StringUtils.isNotBlank(p.getLastName()) && StringUtils.isNotBlank(p.getFirstName()))
                 // 8.2.2 TODO manyConditions 实现了多条件分组
                 .collect(Collectors.groupingBy(person -> manyConditions(person.getFirstName(), person.getLastName())));
