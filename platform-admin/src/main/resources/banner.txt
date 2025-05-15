@@ -1,5 +1,6 @@
 ====================================================================================================================
 
-                    欢迎使用 SYM-MARKET开发平台 - https://github.com/suyongming/sym-online-market
+                    欢迎使用 SYM开发平台 - https://github.com/suyongming/sym-online-market
+                    Swargger2 - http://localhost:8080/platform-admin/swagger-ui.html
 
 ====================================================================================================================

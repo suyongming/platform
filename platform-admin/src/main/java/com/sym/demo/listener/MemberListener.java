@@ -3,6 +3,7 @@ package com.sym.demo.listener;
 import com.alibaba.fastjson.JSONObject;
 import com.sym.demo.event.MemberLikeEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -20,7 +21,7 @@ public class MemberListener {
      * 点赞监听
      */
     @Async("asyncTaskExecutor")
-    @TransactionalEventListener(MemberLikeEvent.class)
+    @EventListener(MemberLikeEvent.class)
     public void onMemberLikeEvent(MemberLikeEvent event) {
         System.out.println("listener onMemberLikeEvent:" + JSONObject.toJSONString(event));
         log.info("listener onMemberLikeEvent: ｛｝", JSONObject.toJSONString(event));

@@ -3,6 +3,7 @@ package com.sym.demo.event;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.stereotype.Component;
 
 /**
  * @description

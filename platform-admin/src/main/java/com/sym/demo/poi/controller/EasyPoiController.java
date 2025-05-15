@@ -3,6 +3,7 @@ package com.sym.demo.poi.controller;
 import com.sym.demo.poi.dto.GraphicsPushHistoryExcelPoiDTO;
 import com.sym.demo.poi.test.EasyPoiDemo;
 import com.sym.common.utils.poi.EasyPoiUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("poi")
+@Api(tags = "EasyPoi")
 public class EasyPoiController {
     /**
      * 1.普通easyPOI导出

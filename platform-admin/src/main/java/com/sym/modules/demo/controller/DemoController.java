@@ -4,6 +4,7 @@ import com.sym.common.utils.PageUtils;
 import com.sym.common.utils.R;
 import com.sym.demo.event.MemberLikeEvent;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,13 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/demo")
-@Api("事件Demo")
+@Api(tags = "Demo")
 public class DemoController {
     @Resource
     private ApplicationEventPublisher publisher;
 
     @GetMapping("event")
+    @ApiOperation("事件Demo")
     public R list(@RequestParam Map<String, Object> params){
         publisher.publishEvent(new MemberLikeEvent(this, 1L, 2L));
         return R.ok();

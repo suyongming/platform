@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/app")
-@Api("APP登录接口")
+@Api(tags = "APP登录接口")
 public class AppLoginController {
     @Autowired
     private UserService userService;
